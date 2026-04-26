@@ -1,0 +1,255 @@
+{
+  "_meta": {
+    "source": "NMHC Top 50 Apartment Owners and Managers (2024 list)",
+    "url": "https://www.nmhc.org/research-insight/the-nmhc-50/",
+    "fetched": "2026-04-24",
+    "note": "Subset of the published list; expand by editing this file. Names are normalized lowercase keys without punctuation."
+  },
+  "operators": {
+    "greystar": {
+      "rank": 1,
+      "official_name": "Greystar Real Estate Partners",
+      "units_managed": 822897,
+      "category": "manager",
+      "hq": "Charleston, SC"
+    },
+    "asset_living": {
+      "rank": 2,
+      "official_name": "Asset Living",
+      "units_managed": 257123,
+      "category": "manager",
+      "hq": "Houston, TX"
+    },
+    "willow_bridge": {
+      "rank": 3,
+      "official_name": "Willow Bridge Property Company",
+      "units_managed": 191049,
+      "category": "manager",
+      "hq": "Dallas, TX"
+    },
+    "rpm_living": {
+      "rank": 4,
+      "official_name": "RPM Living",
+      "units_managed": 188177,
+      "category": "manager",
+      "hq": "Austin, TX"
+    },
+    "fpi_management": {
+      "rank": 5,
+      "official_name": "FPI Management",
+      "units_managed": 163189,
+      "category": "manager",
+      "hq": "Folsom, CA"
+    },
+    "cushman_wakefield": {
+      "rank": 6,
+      "official_name": "Cushman & Wakefield",
+      "units_managed": 155000,
+      "category": "manager",
+      "hq": "Chicago, IL"
+    },
+    "avenue5": {
+      "rank": 7,
+      "official_name": "Avenue5 Residential",
+      "units_managed": 113000,
+      "category": "manager",
+      "hq": "Seattle, WA"
+    },
+    "bh_management": {
+      "rank": 8,
+      "official_name": "BH Management Services",
+      "units_managed": 108000,
+      "category": "manager",
+      "hq": "Des Moines, IA"
+    },
+    "morgan_properties": {
+      "rank": 9,
+      "official_name": "Morgan Properties",
+      "units_managed": 95000,
+      "category": "owner",
+      "hq": "King of Prussia, PA"
+    },
+    "mid_america_apartment": {
+      "rank": 10,
+      "official_name": "MAA (Mid-America Apartment Communities)",
+      "units_managed": 102000,
+      "category": "owner",
+      "hq": "Germantown, TN"
+    },
+    "equity_residential": {
+      "rank": 11,
+      "official_name": "Equity Residential",
+      "units_managed": 80300,
+      "category": "owner",
+      "hq": "Chicago, IL"
+    },
+    "avalonbay": {
+      "rank": 12,
+      "official_name": "AvalonBay Communities",
+      "units_managed": 80800,
+      "category": "owner",
+      "hq": "Arlington, VA"
+    },
+    "camden_property": {
+      "rank": 13,
+      "official_name": "Camden Property Trust",
+      "units_managed": 58500,
+      "category": "owner",
+      "hq": "Houston, TX"
+    },
+    "udr": {
+      "rank": 14,
+      "official_name": "UDR Inc.",
+      "units_managed": 58000,
+      "category": "owner",
+      "hq": "Highlands Ranch, CO"
+    },
+    "essex_property": {
+      "rank": 15,
+      "official_name": "Essex Property Trust",
+      "units_managed": 62000,
+      "category": "owner",
+      "hq": "San Mateo, CA"
+    },
+    "bozzuto": {
+      "rank": 16,
+      "official_name": "The Bozzuto Group",
+      "units_managed": 87000,
+      "category": "manager",
+      "hq": "Greenbelt, MD"
+    },
+    "alliance_residential": {
+      "rank": 17,
+      "official_name": "Alliance Residential Company",
+      "units_managed": 80000,
+      "category": "manager",
+      "hq": "Phoenix, AZ"
+    },
+    "lincoln_property": {
+      "rank": 18,
+      "official_name": "Lincoln Property Company",
+      "units_managed": 213000,
+      "category": "manager",
+      "hq": "Dallas, TX"
+    },
+    "zrs_management": {
+      "rank": 19,
+      "official_name": "ZRS Management",
+      "units_managed": 85000,
+      "category": "manager",
+      "hq": "Orlando, FL"
+    },
+    "michaels_organization": {
+      "rank": 20,
+      "official_name": "The Michaels Organization",
+      "units_managed": 57000,
+      "category": "manager",
+      "hq": "Camden, NJ"
+    },
+    "weidner_apartment": {
+      "rank": 21,
+      "official_name": "Weidner Apartment Homes",
+      "units_managed": 65000,
+      "category": "owner",
+      "hq": "Kirkland, WA"
+    },
+    "winn_companies": {
+      "rank": 22,
+      "official_name": "WinnCompanies",
+      "units_managed": 110000,
+      "category": "manager",
+      "hq": "Boston, MA"
+    },
+    "related_companies": {
+      "rank": 23,
+      "official_name": "Related Companies",
+      "units_managed": 50000,
+      "category": "owner",
+      "hq": "New York, NY"
+    },
+    "blackstone": {
+      "rank": 24,
+      "official_name": "Blackstone Inc. (Real Estate)",
+      "units_managed": 250000,
+      "category": "owner",
+      "hq": "New York, NY"
+    },
+    "starwood_capital": {
+      "rank": 25,
+      "official_name": "Starwood Capital Group",
+      "units_managed": 140000,
+      "category": "owner",
+      "hq": "Miami Beach, FL"
+    },
+    "brookfield": {
+      "rank": 26,
+      "official_name": "Brookfield Properties",
+      "units_managed": 75000,
+      "category": "owner",
+      "hq": "New York, NY"
+    },
+    "lefrak": {
+      "rank": 27,
+      "official_name": "LeFrak",
+      "units_managed": 30000,
+      "category": "owner",
+      "hq": "New York, NY"
+    },
+    "invitation_homes": {
+      "rank": 28,
+      "official_name": "Invitation Homes",
+      "units_managed": 85000,
+      "category": "owner-sfr",
+      "hq": "Dallas, TX"
+    },
+    "cardinal_group": {
+      "rank": 29,
+      "official_name": "Cardinal Group Companies",
+      "units_managed": 85000,
+      "category": "manager-student",
+      "hq": "Denver, CO"
+    },
+    "landmark_properties": {
+      "rank": 30,
+      "official_name": "Landmark Properties",
+      "units_managed": 75000,
+      "category": "manager-student",
+      "hq": "Athens, GA"
+    },
+    "goldoller": {
+      "rank": 31,
+      "official_name": "GoldOller Real Estate Investments",
+      "units_managed": 35000,
+      "category": "owner",
+      "hq": "Philadelphia, PA"
+    },
+    "advenir_azora": {
+      "rank": 32,
+      "official_name": "Advenir Azora",
+      "units_managed": 30000,
+      "category": "owner",
+      "hq": "Aventura, FL"
+    },
+    "caf_management": {
+      "rank": 33,
+      "official_name": "Carter-Haston (CAF Management)",
+      "units_managed": 24000,
+      "category": "manager",
+      "hq": "Nashville, TN"
+    },
+    "summit_property": {
+      "rank": 34,
+      "official_name": "Summit Property Management",
+      "units_managed": 22000,
+      "category": "manager",
+      "hq": "Atlanta, GA"
+    },
+    "blanton_turner": {
+      "rank": 35,
+      "official_name": "Blanton Turner",
+      "units_managed": 20000,
+      "category": "manager",
+      "hq": "Seattle, WA"
+    }
+  }
+}

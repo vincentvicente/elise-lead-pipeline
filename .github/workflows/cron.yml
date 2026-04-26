@@ -1,0 +1,80 @@
+name: Daily Lead Pipeline
+
+# Triggers:
+#   - Scheduled: 09:00 UTC daily (matches PART_A v2 §3.1)
+#   - Manual: dispatch from Actions tab for ad-hoc reruns
+on:
+  schedule:
+    - cron: "0 9 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Prevent overlapping runs — if one is still going, skip the new trigger
+concurrency:
+  group: lead-pipeline-cron
+  cancel-in-progress: false
+
+jobs:
+  pipeline:
+    name: Run pipeline
+    runs-on: ubuntu-latest
+    timeout-minutes: 30  # generous; typical run is 5–10 min for ~50 leads
+
+    defaults:
+      run:
+        working-directory: backend
+
+    env:
+      # Database (Neon Postgres) — connection string lives in repo secrets
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
+      # Enrichment APIs
+      CENSUS_API_KEY: ${{ secrets.CENSUS_API_KEY }}
+      NEWS_API_KEY: ${{ secrets.NEWS_API_KEY }}
+      WALKSCORE_API_KEY: ${{ secrets.WALKSCORE_API_KEY }}
+      FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+
+      # Claude
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+      # Alerting
+      RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+      ALERT_EMAIL: ${{ secrets.ALERT_EMAIL }}
+      ALERT_FROM_ADDRESS: ${{ vars.ALERT_FROM_ADDRESS }}
+
+      # Runtime
+      ENVIRONMENT: production
+      LOG_LEVEL: INFO
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: "latest"
+
+      - name: Set up Python
+        run: uv python install 3.13
+
+      - name: Install dependencies
+        run: uv sync --frozen
+
+      - name: Apply DB migrations
+        run: uv run alembic upgrade head
+
+      - name: Run pipeline
+        # Module entrypoint per PART_A v2 §3
+        run: uv run python -m elise_leads.cron
+
+      - name: Upload structlog output as artifact (debugging aid)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pipeline-logs-${{ github.run_id }}
+          path: backend/*.log
+          if-no-files-found: ignore
+          retention-days: 14

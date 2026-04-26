@@ -1,0 +1,67 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+*.cover
+
+# Virtual envs
+.venv/
+venv/
+env/
+
+# Environment
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+elise.db
+seed.db
+
+# Node / Frontend
+node_modules/
+dist/
+.next/
+.parcel-cache/
+
+# Logs
+*.log
+logs/
+
+# Quota state
+.quota_state.json
+
+# Local dev artifacts
+local/
+scratch/
+
+# Alembic — keep versions, ignore the rest
+backend/alembic.local.ini
+
+# Claude Code working dir
+.claude/

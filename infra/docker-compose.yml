@@ -1,0 +1,25 @@
+# Local Postgres for development.
+# Usage: `docker-compose -f infra/docker-compose.yml up -d`
+# Then set DATABASE_URL=postgresql+asyncpg://elise:elise@localhost:5432/elise in backend/.env
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: elise-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: elise
+      POSTGRES_PASSWORD: elise
+      POSTGRES_DB: elise
+    ports:
+      - "5432:5432"
+    volumes:
+      - elise_pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U elise -d elise"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+volumes:
+  elise_pg_data:
