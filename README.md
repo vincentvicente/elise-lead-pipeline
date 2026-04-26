@@ -211,6 +211,33 @@ Take-home scale (50 leads/batch, 30 days dashboard usage):
 
 Scaling beyond 500 leads/day: enable prompt caching (-88% input cost), Claude Batch API (-50%), Redis cache. See [PART_A §16](./PART_A_Technical_Design.md).
 
+## Daily cron in GitHub Actions
+
+`.github/workflows/cron.yml` schedules the pipeline at **09:00 UTC daily** and
+also exposes a manual trigger via the Actions tab (`workflow_dispatch`).
+
+By default the workflow detects missing secrets and **skips the run with a
+warning** — so a fresh fork doesn't fail every day in your inbox. To enable
+real daily runs, add these repo secrets (Settings → Secrets → Actions):
+
+| Secret | Purpose |
+|---|---|
+| `DATABASE_URL` | Postgres connection string (Neon free tier works) |
+| `ANTHROPIC_API_KEY` | Claude API key |
+| `CENSUS_API_KEY` | U.S. Census ACS key (free, instant) |
+| `NEWS_API_KEY` | NewsAPI free tier key |
+| `WALKSCORE_API_KEY` | WalkScore API key (24–48 h approval) |
+| `FRED_API_KEY` | FRED API key (free, instant) |
+| `RESEND_API_KEY` | Resend transactional email key |
+| `ALERT_EMAIL` | Recipient address for pipeline alerts |
+
+Plus the repo *variable* `ALERT_FROM_ADDRESS` (e.g.
+`EliseAI Pipeline <onboarding@resend.dev>`).
+
+`DATABASE_URL` and `ANTHROPIC_API_KEY` are the minimum required; the others
+enable individual enrichers — a missing key just disables that one enricher,
+and the median-fallback path kicks in.
+
 ## Status
 
 ```

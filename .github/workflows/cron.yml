@@ -63,10 +63,26 @@ jobs:
       - name: Install dependencies
         run: uv sync --frozen
 
+      # Detect whether the repo has the required secrets configured. On a
+      # take-home / fork without secrets, we skip the actual pipeline run
+      # so the workflow exits clean — failing daily would just spam the
+      # owner's notifications.
+      - name: Detect secret configuration
+        id: secrets
+        run: |
+          if [ -z "$DATABASE_URL" ] || [ -z "$ANTHROPIC_API_KEY" ]; then
+            echo "configured=false" >> $GITHUB_OUTPUT
+            echo "::warning title=Pipeline skipped::DATABASE_URL or ANTHROPIC_API_KEY not configured. Add the required repo secrets to enable daily runs (see README)."
+          else
+            echo "configured=true" >> $GITHUB_OUTPUT
+          fi
+
       - name: Apply DB migrations
+        if: steps.secrets.outputs.configured == 'true'
         run: uv run alembic upgrade head
 
       - name: Run pipeline
+        if: steps.secrets.outputs.configured == 'true'
         # Module entrypoint per PART_A v2 §3
         run: uv run python -m elise_leads.cron
 
