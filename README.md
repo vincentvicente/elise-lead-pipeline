@@ -3,7 +3,7 @@
 Production-shaped MVP for inbound-lead enrichment, ICP scoring, and outreach drafting — built for the **EliseAI GTM Engineer take-home** (April 2026).
 
 > 🎬 **Looking for the demo?** See [DEMO_SCRIPT.md](./DEMO_SCRIPT.md) for the 4-minute storyboard.
-> 📐 **Looking for the design?** See [PART_A](./PART_A_Technical_Design.md) (technical) and [PART_B](./PART_B_Rollout_Plan.md) (rollout plan) — both bilingual 中/EN.
+> 📐 **Looking for the design?** See [PART_A](./PART_A_Technical_Design.md) (technical spec) and [ROLLOUT_PLAN.md](./ROLLOUT_PLAN.md) (sales-org rollout plan).
 
 ---
 
@@ -132,8 +132,9 @@ uv run pytest tests/unit/test_rubric.py    # 9 golden cases for the scoring rubr
 
 ```
 .
-├── PART_A_Technical_Design.md     ← Full technical spec (中/EN)
-├── PART_B_Rollout_Plan.md         ← 8-week rollout plan (中/EN)
+├── PART_A_Technical_Design.md     ← Full technical spec
+├── PART_B_Rollout_Plan.md         ← Original v2 rollout doc (audit trail)
+├── ROLLOUT_PLAN.md                ← Polished standalone rollout plan
 ├── DEMO_SCRIPT.md                 ← 4-min demo storyboard
 ├── backend/
 │   ├── elise_leads/
