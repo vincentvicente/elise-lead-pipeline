@@ -99,6 +99,20 @@ export function EmailEditor({ leadId, email, sdrEmail }: Props) {
         )}
       </div>
 
+      {/* Generation trail — surfaces the LLM fallback chain when applicable */}
+      {email.warnings.length > 0 && (
+        <div className="mb-3 px-3 py-2 rounded-md text-xs bg-amber-50 border border-amber-200 text-amber-800">
+          <div className="font-medium mb-1">
+            ⚠ Generation trail ({email.warnings.length})
+          </div>
+          <ul className="list-disc ml-4 space-y-0.5 font-mono text-[11px]">
+            {email.warnings.map((w, i) => (
+              <li key={i}>{w}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       {/* Subject */}
       <div className="mb-3">
         <label className="text-xs font-medium text-slate-600 block mb-1">
