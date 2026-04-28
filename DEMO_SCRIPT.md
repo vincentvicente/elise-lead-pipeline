@@ -1,18 +1,25 @@
 # Demo Script — EliseAI Lead Pipeline
 
-A scripted walkthrough tied to the actual seed data on screen. The demo
-runs **~4 minutes**, followed by a **3–5 minute architecture & rollout
-walkthrough**, landing inside the 5–15 minute window the take-home PDF
-allows.
+A scripted walkthrough for the take-home demo video.
+Total length: **~9 minutes** (within the 5–15 minute window the PDF allows).
 
-> Every name, number, and click in this script matches what you'll see
-> on `http://localhost:5173/` after running `uv run python -m scripts.seed_demo`.
+---
+
+## How this video covers the PDF deliverables
+
+| PDF asks | Covered in |
+|---|---|
+| ① Which public APIs you used and why | **Intro** (0:00–0:30) |
+| ② How your workflow enriches, scores, and outputs leads | **Scene 1, 2, 5** |
+| ③ Any assumptions made and logic behind them | **Scene 2 + Walkthrough B** |
+| ④ How your scoring/outreach helps a sales rep | **Scene 2 + Scene 3** |
+| ⑤ Project plan and rollout process | **Walkthrough D** |
 
 ---
 
 ## Pre-record state on the dashboard
 
-The seed produces this exact state — verify with a glance before recording:
+Run `uv run python -m scripts.seed_demo` first. Then verify:
 
 ```
 Overview KPIs:
@@ -21,15 +28,8 @@ Overview KPIs:
   • Approval rate:      50.0 %
   • Avg review time:    0.9 min
 
-Today's pipeline tile:
-  • Processed: 8  (3 Hot · 2 Warm · 3 Cold)
-  • Pending review: 3
-  • Last run health: 8/8 (clean)
-
-Tier donut today:  3 Hot / 2 Warm / 3 Cold
-Recent runs:
-  • success 8/8 · ~3 hours ago
-  • partial 8/10 · 1 day ago
+Tier today:  3 Hot · 2 Warm · 3 Cold
+Pending:     3   ← will grow to 6 in Scene 5
 
 Inbox (sorted by score):
   92 Hot   Sarah Johnson    @ Greystar              ★ main demo lead
@@ -40,257 +40,369 @@ Inbox (sorted by score):
   42 Cold  Casey Brown      @ Desert Properties
   38 Cold  Robin Park       @ Park Apartments LLC
   35 Cold  Jordan Cole      @ Unknown Operator Co   ⚠ template_fallback (failure mode)
-
-Pending (3):
-  • Alex Rivera   @ Morgan Properties
-  • Sam Wong      @ Equity Residential
-  • Drew Patel    @ Willow Bridge Property Company
 ```
 
 ---
 
 ## Pre-record checklist (5 minutes before recording)
 
-- [ ] Browser at `http://localhost:5173/` zoomed to **110–125%**, hard-refresh with `Cmd+Shift+R`
-- [ ] Backend running (`http://localhost:8000/healthz` returns `{"status":"ok"}`)
-- [ ] Frontend dev server running (you see the dashboard)
+- [ ] Browser at `http://localhost:5173/` zoomed to **110–125%**, hard-refresh `Cmd+Shift+R`
+- [ ] Backend running (curl `http://localhost:8000/healthz` → `{"status":"ok"}`)
+- [ ] Frontend dev server running
 - [ ] Three Chrome tabs prepared in **incognito**:
   - Tab 1: dashboard `localhost:5173/`
-  - Tab 2: Swagger `localhost:8000/docs`
+  - Tab 2: Swagger `localhost:8000/docs` (optional)
   - Tab 3: GitHub `https://github.com/vincentvicente/elise-lead-pipeline`
-- [ ] Terminal third-tab pre-positioned with `cd backend` ready, command staged but not executed:
-  - `uv run python -m scripts.simulate_crm_webhook`
+- [ ] Terminal Tab C pre-positioned at `cd "/Users/vicentezhu/Desktop/EliseAI task/backend"`
 - [ ] macOS: Do Not Disturb ON · Dock auto-hidden · Slack/WeChat/Mail closed
-- [ ] DEMO_SCRIPT.md open on second monitor or phone for cuing
-- [ ] Loom Business plan active (5-min limit removed) — recording mode set to **Full Screen**
-- [ ] Mic test: say "EliseAI Lead Pipeline Demo" — input meter shows mid-range
+- [ ] DEMO_SCRIPT.md open on second monitor or phone
+- [ ] Loom Business · Full Screen mode · mic level mid-range
 
 ---
 
-## Scene 1 · Overview dashboard (30s)
+# 🎬 Recording starts here
+
+---
+
+## Intro · Project + APIs (30s) — covers PDF ①
 
 **Action**
-1. Land on `localhost:5173/` (Overview is the default route)
-2. Pause 1 second on the KPI row — let the four numbers register
-3. Drift the cursor down to the **Today's pipeline** card
+- Sit on the Overview page (you haven't shown anything yet)
+- Don't click anything — just speak
+
+**Voiceover (~70 words, slow + clear)**
+> "Hi, I'm Vincent. This is my take-home for the EliseAI GTM Engineer
+> role.
+>
+> The tool takes a raw inbound lead — just name, email, company, and
+> property address — and produces a scored, ready-to-send outreach
+> email.
+>
+> It uses **seven public APIs**: Census Geocoder and Census ACS for
+> demographics, NewsAPI for company news, Wikipedia for company
+> background, WalkScore for property walkability, FRED for rental
+> market signals, and a local NMHC Top 50 list — that's the official
+> ranking of the largest US apartment operators, where most of EliseAI's
+> existing customers come from.
+>
+> Plus Claude for the email writing.
+>
+> Let me show you the dashboard first, then walk through how it works."
+
+> 💡 **Why these APIs**: each one was picked for a specific scoring
+> dimension. Census + WalkScore answer "is this a good market?" NewsAPI
+> + Wikipedia + NMHC answer "is this a good company?" FRED answers
+> "how tight is the rental market right now?"
+> All free or free-tier. Total cost per lead ~$0.015 (Claude).
+
+---
+
+## Scene 1 · Overview dashboard (20s) — covers PDF ②
+
+**Action**
+1. You're already on the Overview page
+2. Slowly point at the four KPI cards
+3. Drift cursor down to the **Today's pipeline** card
 
 **Voiceover (~50 words)**
-> "This is the dashboard for an inbound lead pipeline I built for the
-> EliseAI GTM Engineer take-home. Today's KPIs at the top: 8 leads
-> processed, 37.5% Hot tier, 50% approval rate from the SDR team,
-> average review time under one minute. The strip below shows today's
-> tier breakdown — 3 Hot, 2 Warm, 3 Cold — plus 3 leads still pending
-> review. The 7-day trend and tier donut are below."
-
-**Visual targets confirmed**
-- KPI numbers visible and readable
-- "Today's pipeline" tile shows 3 Hot · 2 Warm · 3 Cold
-- Tier donut on right shows the same 3/2/3 split
+> "Top of the dashboard: today's KPIs.
+>
+> 8 leads processed. About 37% scored as Hot tier. Approval rate from
+> the SDR team is 50%. Average review time is under one minute.
+>
+> Below that — today's split: 3 Hot, 2 Warm, 3 Cold. Plus 3 leads
+> still waiting to be processed.
+>
+> The 7-day trend and tier donut are below."
 
 ---
 
-## Scene 2 · Inbox + Sarah Johnson detail (90s)
+## Scene 2 · Hot lead detail (90s) — covers PDF ②③④
 
 **Action**
-1. Click **Inbox** in the sidebar
-2. Pause on the left panel — note the leads are sorted by score, Sarah Johnson at the top with a Hot badge and 92
-3. Click **Sarah Johnson** row
-4. Right pane: scan the 4 insight bullets at the top
+1. Click **Inbox** in sidebar
+2. Pause — point at the score-sorted list (Sarah Johnson at top, score 92, Hot badge)
+3. Click **Sarah Johnson**
+4. Read the 4 insight bullets at the top
 5. Click to expand the **score breakdown** collapse
-6. Point cursor at *Company Scale 25/25*, then *Buy Intent 20/20*
-7. Read 2–3 lines of the email body (out loud)
-8. Click to expand **Source attribution** at the bottom
-9. Hover a green confidence badge (≥ 0.85) and an amber one (< 0.85)
+6. Hover *Company Scale 25/25* and *Buy Intent 20/20*
+7. Read 2–3 lines of the email body out loud
+8. Scroll down, click to expand **Source attribution**
+9. Hover one green confidence badge (≥ 0.85), one amber (< 0.85)
 
-**Voiceover (~140 words)**
-> "Inbox sorts leads by score so Hot leads surface first. Sarah Johnson
-> at Greystar — 92 out of 100. The four insights up top: NMHC number-one
-> operator, recent acquisition news, high renter density market, and
-> matching corporate-domain email.
+**Voiceover (~150 words, two paragraphs — pause between them)**
+> "Inbox sorts leads by score. Sarah Johnson at Greystar is at the top.
+> 92 out of 100, Hot tier.
 >
-> The score breakdown shows where the points came from across six
-> dimensions. Sarah maxes out Company Scale and Buy Intent — that's the
-> NMHC ranking plus the M&A news combined. Geography contributes the
-> rest, but it's not what tipped her into Hot.
+> The four insights at the top tell the SDR what matters: Greystar is
+> the number-one operator on the NMHC Top 50, with 800,000 units
+> managed. There's a recent acquisition in the news. The property is
+> in a high-renter-density market. And the email is from a corporate
+> domain that matches the company.
 >
-> The email itself is grounded in verified facts only. Each fact has a
-> source and a confidence — green badges at 0.95 are citable specific
-> numbers, amber ones can be referenced as a topic but not as a figure.
-> The green banner at the top confirms the post-generation hallucination
-> check passed before the draft reached the SDR."
-
-**Visual targets confirmed**
-- Sarah at the top of the Inbox list
-- Score 92 / Hot badge visible
-- "Hallucination check passed" green banner visible above the email
-- Source attribution panel shows confidence numbers (0.95, 0.85, etc.)
+> The score breakdown shows where the 92 points came from — six
+> dimensions across company, geography, and contact.
+>
+> Now — **the assumption behind this rubric**: 55 of the 100 points
+> go to company signals — scale, buy intent, and vertical fit. Only
+> 30 points to geography. The first version of this rubric weighted
+> geography too heavily. A small operator with a Manhattan property
+> would land Hot just because Manhattan. The fix: company strength
+> dominates. Sarah scores 92 because Greystar is huge and active,
+> not because Austin is hot.
+>
+> Then the email itself. Every fact has a source and a confidence
+> score. Green badges at 0.95 mean 'safe to cite specific numbers.'
+> Amber badges below 0.85 mean 'mention the topic, but not the
+> figure.' The green banner above the email confirms the
+> hallucination check passed before the SDR ever saw it.
+>
+> **What this saves the SDR**: a manual research pass like this is
+> typically 15 to 30 minutes per lead. The tool does it in 30 seconds."
 
 ---
 
-## Scene 3 · One-click feedback loop (30s)
+## Scene 3 · One-click feedback loop (30s) — covers PDF ④
 
 **Action**
-1. In Sarah's email body, lightly edit one phrase — e.g. add a word
-2. Note the button changes from "Approve" to **Save & Approve**, and a new **View Changes** button appears
+1. In Sarah's email body, lightly edit one phrase — e.g. add or change a word
+2. Note the button changes from "Approve" to **Save & Approve**, plus a new **View Changes** button
 3. Click **View Changes** → diff modal opens
 4. Pause 2 seconds on the red/green diff
-5. Close the modal
-6. Click **Save & Approve** → green confirmation appears
-7. Scroll down to the Feedback history list — new row appears with action `edited`
+5. Close modal
+6. Click **Save & Approve** → green confirmation
+7. Scroll down to Feedback history — new row appears with action `edited`
 
 **Voiceover (~50 words)**
-> "When the SDR makes any edit, the workflow captures both the original
-> and the final draft, computes the diff, and stores both. The review
-> timer measures verification burden — the rollout-plan KPI we want
-> below 2 minutes per email. Phase 2 of the rollout runs entirely on
-> this feedback data."
-
-**Visual targets confirmed**
-- Diff modal shows side-by-side red/green
-- Feedback history shows the new `edited` row at the top
+> "When the SDR edits the email, the tool captures both versions —
+> original and final — plus the diff and how long the review took.
+>
+> Two reasons this matters. One: every edit becomes data we use to
+> improve the prompt. Two: review time tells us whether we're
+> actually saving the SDR time, not just shifting work."
 
 ---
 
-## Scene 4 · Failure path: template fallback (45s)
+## Scene 4 · Failure case: template fallback (45s) — covers PDF ②③
 
 **Action**
-1. Click **Leads** in the sidebar (or scroll the inbox down)
-2. Filter by **tier = Cold** if convenient
-3. Click **Jordan Cole @ Unknown Operator Co** (score 35 — at the bottom)
-4. In the email pane, point at the source label below "Email draft": **`template_fallback`**
-5. Read the warnings — "LLM unavailable — used deterministic template"
-6. Note the email body still has the right substitutions (company name, city, NMHC reference)
+1. Click **Leads** in sidebar (or scroll down in Inbox)
+2. Click **Jordan Cole @ Unknown Operator Co** (score 35, the bottom of the list)
+3. Point at the source label below "Email draft": **`template_fallback`**
+4. Point at the amber **Generation trail** panel — read 2–3 lines aloud
+5. Show the email body — it still has the right substitutions
 
 **Voiceover (~80 words)**
-> "Now the failure case. Jordan Cole hit the cold path: NewsAPI quota
-> was exhausted, then Claude Sonnet was rate-limited, then the Haiku
-> fallback also failed. The pipeline still produced a usable email,
-> but from a deterministic template instead of an LLM.
+> "Now the failure case. Jordan Cole hit the worst path.
 >
-> The SDR sees exactly that — the source label says `template_fallback`,
-> and the warning explains why. Nothing got dropped, the SDR isn't
-> blocked, and the alert system fired the Resend email so we know to
-> investigate. This is what 4-layer fallback looks like in practice."
-
-**Visual targets confirmed**
-- Jordan Cole shows score 35, Cold tier
-- Email source displays exactly `template_fallback`
-- Warning shows "LLM unavailable — used deterministic template"
+> The yellow box shows exactly what happened: NewsAPI hit its 429
+> rate limit. Then Claude Sonnet was rate-limited twice. Then Haiku
+> failed twice with 503. The whole LLM fallback chain was exhausted.
+>
+> So the system fell back to a deterministic template. The SDR still
+> gets a usable email — it has the company name, the city, our
+> NMHC reference. Nothing got dropped. The SDR isn't blocked. And
+> the alert system fired so we know to investigate.
+>
+> **The assumption here**: any one piece of the pipeline can fail,
+> but the SDR should never get nothing. Four-layer fallback is how
+> we hold that promise."
 
 ---
 
-## Scene 5 · Production entry point: webhook simulator (45s)
+## Scene 5 · Production input: webhook simulator (45s) — covers PDF ②
 
 **Action**
-1. Switch to your terminal (third tab, already cd'd into `backend/`)
-2. Run:
+1. Switch to terminal Tab C (already at `backend/`)
+2. Paste and run:
    ```bash
    uv run python -m scripts.simulate_crm_webhook
    ```
-3. Watch the output — three webhooks fire, output shows source labels (Salesforce / HubSpot / Zapier) and lead_ids
-4. Switch back to dashboard browser tab
+3. Watch output — three webhooks fire, source labels visible
+4. Switch back to dashboard
 5. Click **Leads** → filter by **status = pending**
-6. Notice the count went from 3 to 6 — the three new rows are **Marcus Tate, Priya Desai, Devin Park**
-7. Hover one row briefly to highlight it
+6. Notice count went from 3 to 6 — the new rows are **Marcus Tate, Priya Desai, Devin Park**
 
 **Voiceover (~80 words)**
-> "Production input is a webhook, not the CSV upload. Here's a script
-> that mimics three CRMs — Salesforce, HubSpot, and Zapier — POSTing
-> inbound leads to our public webhook endpoint. The endpoint is generic,
-> so any system that fires webhooks can integrate.
+> "In production, leads don't come from CSV uploads — they come from
+> the CRM. When someone fills out a form on the EliseAI site,
+> Salesforce or HubSpot fires a webhook to our tool.
 >
-> Three webhooks, three new pending leads. Same downstream pipeline as
-> CSV upload — single `Lead.status='pending'` anchor. The CSV upload in
-> the dashboard is the manual fallback for batch imports by RevOps."
-
-**Visual targets confirmed**
-- Terminal shows 3× `→ 202 lead_id=...`
-- Pending leads page shows total = 6 (was 3)
-- New names visible: Marcus Tate, Priya Desai, Devin Park
+> Here's a script that mimics three CRMs — Salesforce, HubSpot, and
+> Zapier — sending us inbound leads.
+>
+> Three webhooks fire. Three new pending leads. Same downstream
+> pipeline as the CSV upload. The CSV is just the manual fallback for
+> RevOps batch imports.
+>
+> The takeaway: this tool drops into any sales stack that fires
+> webhooks. Salesforce, HubSpot, Zapier, even raw form submissions."
 
 ---
 
-## Architecture & rollout walkthrough (~4 minutes)
+# 🛠 Architecture & rollout walkthrough (~4 min)
 
-After Scene 5, switch to a wider explanatory mode. Open the relevant docs in tabs as you talk:
+After Scene 5, switch to a wider explanatory mode. Open the relevant docs in tabs as you talk.
 
-### A. Architecture (1 min)
+---
 
-Open `PART_A_Technical_Design.md` § 3 in a new tab. Show the architecture diagram. Hit:
+## A. Architecture (1 min) — covers PDF ②
 
-> "Pipeline and dashboard are deliberately separated. Cron runs in
-> GitHub Actions, writes to Postgres on Neon. FastAPI serves the
-> dashboard, React frontend on Vercel. They share the same Postgres
-> as the single source of truth. Resend handles outbound alerts.
-> The whole thing runs in production on free tiers — total cost
-> under one dollar for the take-home scale of 50 leads per batch."
+Open `PART_A_Technical_Design.md` § 3 in a tab. Show the architecture diagram.
 
-### B. Scoring rubric (1 min)
+**Voiceover (~110 words)**
+> "The architecture has two halves that share a single Postgres
+> database.
+>
+> On one side, a daily cron runs in GitHub Actions — pulls new pending
+> leads, runs them through the pipeline, writes the results back. On
+> the other side, a FastAPI backend with a React dashboard, deployed
+> on Render and Vercel. They share the same Neon Postgres. Resend
+> handles outbound alerts when something fails.
+>
+> Two notes on this deployment.
+>
+> One — for the take-home demo I used Render, Vercel, and Neon free
+> tiers. Total cost is about one dollar per batch of 50 leads. For
+> actual EliseAI production, the same code drops onto AWS inside
+> your VPC: change the database URL to RDS, swap GitHub Actions for
+> EventBridge, point the React build at S3 plus CloudFront. The
+> architecture is portable; nothing about the tool is locked to a
+> specific cloud.
+>
+> Two — only DevOps touches any of this. SDRs just open a browser URL.
+> Their daily experience is the dashboard you saw earlier — no
+> terminal, no setup, no deploy. The complexity stays on the
+> engineering side."
 
-Scroll to PART_A § 10:
+---
 
-> "The scoring is a 6-dimension rubric, 100 points total, split
-> 55-30-15 between company-side, geography, and contact-side. The
-> v1 design over-weighted geography — a Manhattan property at an
-> unknown company would land Hot just because Manhattan. The v2
-> rubric I shipped flips that: a NMHC top-10 operator in a rural
-> market still tiers Hot, because company strength dominates."
+## B. Scoring rubric + assumptions (1 min) — covers PDF ③④
 
-### C. Hallucination defense (1 min)
+Scroll to PART_A § 10.
 
-PART_A § 11:
+**Voiceover**
+> "The scoring is a six-dimension rubric, 100 points total, weighted
+> 55-30-15.
+>
+> Company-side gets 55 points: 25 for company scale — that's the NMHC
+> ranking — 20 for buy intent from news, and 10 for vertical fit.
+> Geography gets 30 points: market fit, property fit, market dynamics.
+> Contact-side gets 15 points: corporate domain, domain matches
+> company name, and email prefix shape.
+>
+> **Three assumptions baked into this**:
+>
+> One — multifamily housing is EliseAI's core market. So if the
+> company name has 'senior living' or 'commercial real estate' in it,
+> we score it as Cold automatically. Out of scope.
+>
+> Two — EliseAI serves the US and Canada. Anywhere else gets capped at
+> Cold tier with a 'manual review' note.
+>
+> Three — when an API fails to return data, we use the median score
+> for that dimension instead of zero. We don't penalize a great lead
+> just because the Census API timed out.
+>
+> Nine golden test cases verify the rubric — every tier-ordering
+> decision is anchored to a specific test case."
 
+---
+
+## C. Hallucination defense (1 min) — covers PDF ②③
+
+Scroll to PART_A § 11.
+
+**Voiceover**
 > "LLM hallucination is the highest risk in any sales-email AI tool.
-> The defense is four layers. Layer 1: every fact passed to the prompt
-> has a source and confidence in the database. Layer 2: the prompt
-> tells the model to cite specific numbers only above 0.85 confidence.
-> Layer 3: a post-generation check verifies every number and named
-> entity in the draft against the verified-facts list — anything
-> unverified triggers regeneration. Layer 4: the dashboard shows the
-> SDR which fact came from where, so they can self-verify before
-> approving."
+> Inventing a customer name or a fake statistic is a brand incident.
+>
+> The defense is four layers.
+>
+> Layer one: every fact passed to the prompt has a source and a
+> confidence score in the database — that's the provenance table.
+>
+> Layer two: the system prompt tells the model to cite specific
+> numbers only when the fact's confidence is above 0.85.
+>
+> Layer three: after the LLM responds, a post-generation check
+> verifies every number and every named entity in the draft against
+> the verified-facts list. Anything unverified triggers a
+> regeneration, up to two retries.
+>
+> Layer four: the dashboard shows the SDR which fact came from where,
+> so they can self-verify before approving.
+>
+> If all of that fails — like in Jordan Cole's case — the system falls
+> through to a deterministic template instead of shipping garbage."
 
-### D. Rollout plan (1 min)
+---
 
-Open `ROLLOUT_PLAN.md` § 2:
+## D. Rollout plan (1 min) — covers PDF ⑤
 
-> "The rollout is 5 phases over 8 weeks. Phase 0 is one week of infra
-> prep. Phase 1 baselines on historical leads. Phase 2 is co-pilot —
-> SDR Champions review 100% of every draft. Phase 3 expands to the
-> full team with one-click approve UX, still 100% review, plus a 20%
-> control group to measure lift. Phase 4 is the Go/No-Go decision and
-> Salesforce-Outreach integration. Tier-based review sampling — letting
-> SDRs skip Cold tier review — is held back to post-launch stable
-> state. The AI has to earn that trust through accumulated data."
+Open `ROLLOUT_PLAN.md` § 2.
 
-### E. Tests + repo (30s)
+**Voiceover**
+> "The rollout plan is five phases over eight weeks.
+>
+> Phase 0, week zero, is one week of infra prep: provision Neon,
+> deploy backend and frontend, configure secrets.
+>
+> Phase 1, week one, runs the rubric on 30 to 50 historical closed
+> deals to baseline how well the scoring agrees with real outcomes.
+>
+> Phase 2, weeks two and three, is co-pilot mode — one or two SDR
+> Champions review **100% of every email**, no sampling. Every edit
+> they make becomes data to improve the prompt.
+>
+> Phase 3, weeks four to six, expands to the full SDR team using a
+> one-click approve interface, still 100% review. Plus a 20% control
+> group to measure lift versus human-only emails.
+>
+> Phase 4, weeks seven and eight, is the Go/No-Go decision plus
+> Salesforce and Outreach integration.
+>
+> **Important assumption**: tier-based review sampling — letting SDRs
+> skip Cold tier emails — is held back until after launch is stable
+> for at least four weeks. The AI has to earn that trust through
+> data, not by fiat in a process document."
 
-Switch to terminal, run:
+---
+
+## E. Tests + repo (30s)
+
+Switch to a terminal, paste:
 ```bash
-cd backend && uv run pytest 2>&1 | tail -1
+cd "/Users/vicentezhu/Desktop/EliseAI task/backend" && uv run pytest 2>&1 | tail -1
 ```
-Show: `============================= 129 passed ... ==============================`
 
-> "129 tests passing, including 9 golden cases that anchor the
-> scoring rubric — every tier ordering decision the rubric makes
-> is validated against a hand-crafted lead."
+Show: `============================= 129 passed in 3.17s ==============================`
 
-Open GitHub tab — show repo at `vincentvicente/elise-lead-pipeline`.
+**Voiceover**
+> "129 backend tests, all passing. Including 9 golden cases that
+> anchor the scoring rubric — every tier decision is validated
+> against a hand-crafted lead."
+
+Switch to GitHub tab — show the repo at `vincentvicente/elise-lead-pipeline`.
 
 ---
 
 ## Closing (30s)
 
 Voiceover, on the GitHub README:
-> "To summarize: the deliverable is a production-shaped MVP that takes
-> raw inbound leads through 7 enrichment APIs, scores against EliseAI's
-> actual ICP using NMHC and the multifamily dataset, generates outreach
-> emails grounded in source-attributed facts through a 4-layer
-> hallucination defense, and ships a complete dashboard for the SDR
-> feedback loop that powers the rollout plan's Phase 2.
+> "To wrap up.
 >
-> Code, tests, and bilingual design docs are all in the repo. Thanks
-> for watching."
+> The deliverable is a production-shaped MVP: it takes raw inbound
+> leads through 7 public APIs, scores them on EliseAI's actual ICP,
+> and drafts outreach emails grounded in source-attributed facts —
+> with a four-layer guard against hallucination.
+>
+> The dashboard captures the SDR feedback loop that powers Phase 2 of
+> the rollout plan.
+>
+> Code, tests, and design docs are all in the repo.
+>
+> Thanks for watching."
 
 Stop recording.
 
@@ -300,15 +412,37 @@ Stop recording.
 
 | Section | Target |
 |---|---|
-| Scene 1 — Overview | 30s |
+| Intro (APIs + why) | 30s |
+| Scene 1 — Overview | 20s |
 | Scene 2 — Hot lead detail | 90s |
 | Scene 3 — Feedback loop | 30s |
 | Scene 4 — Template fallback | 45s |
 | Scene 5 — Webhook entry | 45s |
-| **Demo total** | **4 min** |
-| Architecture & rollout walkthrough | 4 min |
+| **Demo total** | **4 min 20s** |
+| Walkthrough A — Architecture (incl. demo-vs-production note) | 75s |
+| Walkthrough B — Scoring + assumptions | 60s |
+| Walkthrough C — Hallucination defense | 60s |
+| Walkthrough D — Rollout plan | 60s |
+| Walkthrough E — Tests + repo | 30s |
 | Closing | 30s |
-| **Video total** | **~8.5 min** |
+| **Video total** | **~9 min 15s** |
+
+---
+
+## Pronunciation tips for tricky words
+
+| Word | How to say it |
+|---|---|
+| EliseAI | "uh-LEES AI" (like "police" without the P) |
+| NMHC | "N-M-H-C" (spell out each letter) |
+| Greystar | "GRAY-star" |
+| AvalonBay | "AV-uh-lon BAY" |
+| Bozzuto | "bo-ZOO-toe" |
+| Resend | "RE-send" (not "ree-send") |
+| Render / Vercel | "REN-der" / "ver-SELL" |
+| Anthropic | "an-THROP-ic" |
+| Sonnet | "SON-it" (rhymes with "bonnet") |
+| Haiku | "HIGH-koo" |
 
 ---
 
@@ -316,13 +450,12 @@ Stop recording.
 
 | Pitfall | Fix |
 |---|---|
-| Email source shows wrong value (e.g. all `llm:claude-sonnet-4-6`) | Re-run `python -m scripts.seed_demo` — Jordan Cole is the only template_fallback lead |
-| Webhook simulator says "Connection refused" | Backend isn't running — `uvicorn elise_leads.api.main:app --reload --port 8000` |
-| Pending count doesn't change after webhook | Hard-refresh the browser (`Cmd+Shift+R`); TanStack Query auto-invalidates but cache may need clearing |
+| Pending count shows wrong number | Run the full reset (Stop uvicorn → `rm -f elise.db && alembic upgrade && seed_demo` → restart uvicorn → `Cmd+Shift+R` browser) |
+| Email source shows wrong value | Re-seed; Jordan Cole is the only `template_fallback` lead |
+| Webhook simulator says "Connection refused" | Backend isn't running |
 | Diff modal shows nothing | You didn't actually edit the email — change at least one character |
-| KPIs all show zero | DB was reset but seed didn't run — `python -m scripts.seed_demo` |
-| Notification or app icon appears in recording | Re-record from that scene; in future, full DND mode and quit the offending app |
-| Tier donut shows different counts than 3/2/3 | A previous demo run added leads with `processed_at = today`. Re-seed to reset. |
+| KPIs all show zero | DB was reset but seed didn't run |
+| Notification or app icon appears in recording | Re-record from that scene; full DND mode and quit the offending app |
 
 ---
 
