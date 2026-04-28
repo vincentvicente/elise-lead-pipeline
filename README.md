@@ -133,9 +133,8 @@ uv run pytest tests/unit/test_rubric.py    # 9 golden cases for the scoring rubr
 ```
 .
 ├── PART_A_Technical_Design.md     ← Full technical spec
-├── PART_B_Rollout_Plan.md         ← Original v2 rollout doc (audit trail)
-├── ROLLOUT_PLAN.md                ← Polished standalone rollout plan
-├── DEMO_SCRIPT.md                 ← 4-min demo storyboard
+├── ROLLOUT_PLAN.md                ← 8-week sales-org rollout plan
+├── DEMO_SCRIPT.md                 ← Demo video storyboard + voiceover
 ├── backend/
 │   ├── elise_leads/
 │   │   ├── enrichers/             ← 7 API enrichers + concurrent orchestrator
@@ -167,8 +166,8 @@ uv run pytest tests/unit/test_rubric.py    # 9 golden cases for the scoring rubr
 
 - **Provenance tracking**: every fact passed to the LLM is tagged with `source` + `confidence`. The UI shows them as colored badges (green ≥ 0.85 = citable specific number, amber = topic-only). [PART_A §11.2](./PART_A_Technical_Design.md)
 - **4-layer hallucination defense**: prompt-level grounding rules + post-gen number/entity verification + auto-regeneration + UI source attribution. [PART_A §11](./PART_A_Technical_Design.md)
-- **Tier-based review depth**: Hot 100% review · Warm 50% · Cold 10%, mapped to Inbox/Card/Table dashboard modes. Powers the rollout-plan KPI **verification burden < 2 min/email**. [PART_B §4.3](./PART_B_Rollout_Plan.md)
-- **Closed feedback loop**: every approve/edit/reject captured with `review_seconds` and the original-vs-final diff — directly feeds prompt iteration in Phase 2. [PART_B §4](./PART_B_Rollout_Plan.md)
+- **Tier-based review depth**: Hot 100% review · Warm 50% · Cold 10%, mapped to Inbox/Card/Table dashboard modes. Powers the rollout-plan KPI **verification burden < 2 min/email**. [ROLLOUT_PLAN §4.3](./ROLLOUT_PLAN.md)
+- **Closed feedback loop**: every approve/edit/reject captured with `review_seconds` and the original-vs-final diff — directly feeds prompt iteration in Phase 2. [ROLLOUT_PLAN §4](./ROLLOUT_PLAN.md)
 - **Three input paths**: dashboard CSV upload (manual/RevOps), webhook (Salesforce/HubSpot/Zapier production entry), direct REST API. Same `Lead.status='pending'` anchor downstream.
 - **Graceful degradation**: any enricher can fail → median fallback; LLM can fail → template fallback. SDR is never blocked. Demonstrated by the seeded `Jordan Cole` lead with `email_source='template_fallback'`.
 

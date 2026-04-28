@@ -2,7 +2,7 @@
 ## Requirements & Technical Design
 
 > Production-shaped MVP for the EliseAI GTM Engineer take-home.
-> Companion: [PART_B](./PART_B_Rollout_Plan.md) (rollout plan), [README](./README.md) (quick start), [DEMO_SCRIPT](./DEMO_SCRIPT.md) (video storyboard).
+> Companion: [ROLLOUT_PLAN](./ROLLOUT_PLAN.md) (sales-org rollout plan), [README](./README.md) (quick start), [DEMO_SCRIPT](./DEMO_SCRIPT.md) (video storyboard).
 
 ---
 

@@ -49,11 +49,10 @@ Inbox (sorted by score):
 - [ ] Browser at `http://localhost:5173/` zoomed to **110–125%**, hard-refresh `Cmd+Shift+R`
 - [ ] Backend running (curl `http://localhost:8000/healthz` → `{"status":"ok"}`)
 - [ ] Frontend dev server running
-- [ ] Three Chrome tabs prepared in **incognito**:
-  - Tab 1: dashboard `localhost:5173/`
-  - Tab 2: Swagger `localhost:8000/docs` (optional)
-  - Tab 3: GitHub `https://github.com/vincentvicente/elise-lead-pipeline`
-- [ ] Terminal Tab C pre-positioned at `cd "/Users/vicentezhu/Desktop/EliseAI task/backend"`
+- [ ] Two Chrome tabs prepared in **incognito**:
+  - Tab 1: dashboard `localhost:5173/` ← Scenes 1–5 main stage
+  - Tab 2: GitHub `https://github.com/vincentvicente/elise-lead-pipeline` ← Walkthrough A–E (open `PART_A_Technical_Design.md` for A/B/C, `ROLLOUT_PLAN.md` for D)
+- [ ] Terminal at `cd "/Users/vicentezhu/Desktop/EliseAI task/backend"` ← Scene 5 webhook + Walkthrough E pytest
 - [ ] macOS: Do Not Disturb ON · Dock auto-hidden · Slack/WeChat/Mail closed
 - [ ] DEMO_SCRIPT.md open on second monitor or phone
 - [ ] Loom Business · Full Screen mode · mic level mid-range
@@ -248,7 +247,7 @@ After Scene 5, switch to a wider explanatory mode. Open the relevant docs in tab
 
 ## A. Architecture (1 min) — covers PDF ②
 
-Open `PART_A_Technical_Design.md` § 3 in a tab. Show the architecture diagram.
+Switch to Tab 2 (GitHub). Click into **`PART_A_Technical_Design.md`** and scroll to **§ 3 Architecture**. Show the diagram on screen.
 
 **Voiceover (~110 words)**
 > "The architecture has two halves that share a single Postgres
@@ -279,7 +278,7 @@ Open `PART_A_Technical_Design.md` § 3 in a tab. Show the architecture diagram.
 
 ## B. Scoring rubric + assumptions (1 min) — covers PDF ③④
 
-Scroll to PART_A § 10.
+Stay on `PART_A_Technical_Design.md`. Scroll to **§ 10 Scoring Rubric**.
 
 **Voiceover**
 > "The scoring is a six-dimension rubric, 100 points total, weighted
@@ -311,7 +310,7 @@ Scroll to PART_A § 10.
 
 ## C. Hallucination defense (1 min) — covers PDF ②③
 
-Scroll to PART_A § 11.
+Stay on `PART_A_Technical_Design.md`. Scroll to **§ 11 Email Generation + 4-Layer Hallucination Defense**.
 
 **Voiceover**
 > "LLM hallucination is the highest risk in any sales-email AI tool.
@@ -340,7 +339,7 @@ Scroll to PART_A § 11.
 
 ## D. Rollout plan (1 min) — covers PDF ⑤
 
-Open `ROLLOUT_PLAN.md` § 2.
+Click back to GitHub repo root, open **`ROLLOUT_PLAN.md`**, scroll to **§ 2 Rollout Process** (the 5-phase table).
 
 **Voiceover**
 > "The rollout plan is five phases over eight weeks.
