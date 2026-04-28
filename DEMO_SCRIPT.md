@@ -63,15 +63,22 @@ Inbox (sorted by score):
 
 ---
 
-## Intro · Project + APIs (30s) — covers PDF ①
+## Intro · Project + APIs + data disclaimer (45s) — covers PDF ①
 
 **Action**
 - Sit on the Overview page (you haven't shown anything yet)
 - Don't click anything — just speak
 
-**Voiceover (~70 words, slow + clear)**
+**Voiceover (~110 words, slow + clear)**
 > "Hi, I'm Vincent. This is my take-home for the EliseAI GTM Engineer
 > role.
+>
+> **Quick note before we start: all the leads you'll see are seeded
+> synthetic data. The company names are real — Greystar, AvalonBay,
+> Asset Living, Bozzuto — I picked those because they're EliseAI's
+> actual public customers per the NMHC Top 50 list and your customer
+> stories page. But the contacts, emails, and feedback rows are all
+> fake. No real person was contacted in making this demo.**
 >
 > The tool takes a raw inbound lead — just name, email, company, and
 > property address — and produces a scored, ready-to-send outreach
@@ -411,20 +418,20 @@ Stop recording.
 
 | Section | Target |
 |---|---|
-| Intro (APIs + why) | 30s |
+| Intro (APIs + why + **data disclaimer**) | 45s |
 | Scene 1 — Overview | 20s |
 | Scene 2 — Hot lead detail | 90s |
 | Scene 3 — Feedback loop | 30s |
 | Scene 4 — Template fallback | 45s |
 | Scene 5 — Webhook entry | 45s |
-| **Demo total** | **4 min 20s** |
+| **Demo total** | **4 min 35s** |
 | Walkthrough A — Architecture (incl. demo-vs-production note) | 75s |
 | Walkthrough B — Scoring + assumptions | 60s |
 | Walkthrough C — Hallucination defense | 60s |
 | Walkthrough D — Rollout plan | 60s |
 | Walkthrough E — Tests + repo | 30s |
 | Closing | 30s |
-| **Video total** | **~9 min 15s** |
+| **Video total** | **~9 min 30s** |
 
 ---
 
