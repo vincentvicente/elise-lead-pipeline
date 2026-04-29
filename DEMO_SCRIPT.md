@@ -129,7 +129,7 @@ Inbox (sorted by score):
 1. Click **Inbox** in sidebar
 2. Pause — point at the score-sorted list (Sarah Johnson at top, score 92, Hot badge)
 3. Click **Sarah Johnson**
-4. Read the 4 insight bullets at the top
+4. Read the 5 insight bullets at the top
 5. Click to expand the **score breakdown** collapse
 6. Hover *Company Scale 25/25* and *Buy Intent 20/20*
 7. Read 2–3 lines of the email body out loud
@@ -140,11 +140,11 @@ Inbox (sorted by score):
 > "Inbox sorts leads by score. Sarah Johnson at Greystar is at the top.
 > 92 out of 100, Hot tier.
 >
-> The four insights at the top tell the SDR what matters: Greystar is
-> the number-one operator on the NMHC Top 50, with 800,000 units
-> managed. There's a recent acquisition in the news. The property is
-> in a high-renter-density market. And the email is from a corporate
-> domain that matches the company.
+> The insights at the top tell the SDR what matters in plain English:
+> Greystar is the number-one operator on the NMHC Top 50 with 822,000
+> units managed. There's a recent expansion in the news. The property
+> tract is 68% renter-occupied — strong ICP fit. And it's in a Walker's
+> Paradise — Walk Score 92.
 >
 > The score breakdown shows where the 92 points came from — six
 > dimensions across company, geography, and contact.

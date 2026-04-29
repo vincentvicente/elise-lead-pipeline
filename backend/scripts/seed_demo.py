@@ -401,21 +401,65 @@ async def seed() -> None:
             if is_pending:
                 continue
 
-            # EnrichedData stub
+            # EnrichedData — realistic NMHC + Census + WalkScore + FRED so the
+            # Lead Detail page renders rich insights & provenance for the demo.
+            nmhc_lookup = {
+                "Greystar": {"matched": True, "rank": 1, "units_managed": 822_897, "official_name": "Greystar Real Estate Partners"},
+                "Asset Living": {"matched": True, "rank": 2, "units_managed": 257_123, "official_name": "Asset Living"},
+                "AvalonBay Communities": {"matched": True, "rank": 12, "units_managed": 80_800, "official_name": "AvalonBay Communities"},
+                "Bozzuto Group": {"matched": True, "rank": 16, "units_managed": 87_000, "official_name": "The Bozzuto Group"},
+                "Cardinal Group": {"matched": True, "rank": 29, "units_managed": 85_000, "official_name": "Cardinal Group Companies"},
+            }
+            nmhc_payload = nmhc_lookup.get(p["company"], {"matched": False})
+
+            # Per-tier enrichment richness (Hot/Warm get more data so insights & charts shine)
+            census_payload = None
+            walkscore_payload = None
+            fred_payload = None
+            if p["tier"] in ("Hot", "Warm"):
+                census_payload = {
+                    "geocoder": {"state_fips": "48", "county_fips": "453", "tract_fips": "001100"},
+                    "acs": {
+                        "renter_pct": 0.68 if p["tier"] == "Hot" else 0.55,
+                        "median_household_income": 78_000 if p["tier"] == "Hot" else 62_000,
+                        "median_monthly_rent": 1700 if p["tier"] == "Hot" else 1200,
+                        "total_population": 4500,
+                        "median_age": 33,
+                    },
+                }
+                walkscore_payload = {
+                    "walk_score": 92 if p["tier"] == "Hot" else 64,
+                    "walk_description": "Walker's Paradise" if p["tier"] == "Hot" else "Somewhat Walkable",
+                    "transit_score": 65,
+                    "bike_score": 70,
+                }
+                fred_payload = {
+                    "vacancy_rate_pct": 6.5 if p["tier"] == "Hot" else 5.8,
+                    "rent_yoy_pct": 4.5 if p["tier"] == "Hot" else 3.2,
+                    "state": p["state"],
+                }
+
             session.add(
                 EnrichedData(
                     lead_id=lead.id,
-                    nmhc_json={"matched": True, "rank": 1} if "Greystar" in p["company"] else {"matched": False},
+                    nmhc_json=nmhc_payload,
                     news_json={
                         "articles": [
                             {
                                 "title": f"{p['company']} expands portfolio",
                                 "source": "Multifamily Dive",
+                                "url": "https://multifamilydive.com/example",
                                 "published_at": "2026-04-22T00:00:00Z",
+                                "relevance_score": 0.7,
                             }
                         ],
                         "signal_keywords": {"medium_high": ["expansion"]},
+                        "premium_count": 0,
+                        "total_results": 1,
                     },
+                    census_json=census_payload,
+                    walkscore_json=walkscore_payload,
+                    fred_json=fred_payload,
                     errors={},
                 )
             )
